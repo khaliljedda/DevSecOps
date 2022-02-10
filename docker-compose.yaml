@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+  back:
+    build:
+      context: ./Back
+      dockerfile: Dockerfile
+    image: 'springapp'
+    ports:
+      - 8000:8080
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/employeemanager
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  front:
+    build:
+      context: ./Front
+      dockerfile: Dockerfile
+    image: 'angularapp'
+    ports:
+      - 4200:80
+    depends_on:
+      - back
+    environment:
+      - API_URL='http://localhost:8000'
+
+  db:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: 'employeemanager'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: ""
+    volumes:
+      - ./db:/var/lib/mysql
+
+  
