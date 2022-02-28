@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empapp-back
+  labels:
+    app: empapp-back
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: empapp-back
+  template:
+    metadata:
+      labels:
+        app: empapp-back
+    spec:
+      containers:
+      - name: empapp-back
+        image: khalil4/employee-app-back
+      
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: mysql-configmap
+              key: database_url
+        - name: DB_DATABASE
+          valueFrom: 
+            configMapKeyRef:
+              name: mysql-configmap
+              key: database_name
+        - name: DB_USERNAME
+          valueFrom: 
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-username
+        - name: DB_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-password  
+                 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: empapp-back-service
+spec:
+  selector:
+    app: blog-back
+  type: LoadBalancer  
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000
