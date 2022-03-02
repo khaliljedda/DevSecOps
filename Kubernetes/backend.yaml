@@ -23,7 +23,7 @@ spec:
         env:
         - name: DB_HOST
           valueFrom:
-            secretKeyRef:
+            configMapKeyRef:
               name: mysql-configmap
               key: database_url
         - name: DB_DATABASE
