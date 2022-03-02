@@ -37,7 +37,7 @@ metadata:
 spec:
   selector:
     app: empapp-front
-  type: LoadBalancer  
+  type: nodePort  
   ports:
     - protocol: TCP
       port: 80
