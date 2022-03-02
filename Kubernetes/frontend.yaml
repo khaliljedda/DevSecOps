@@ -37,7 +37,7 @@ metadata:
 spec:
   selector:
     app: empapp-front
-  type: nodePort  
+  type: NodePort  
   ports:
     - protocol: TCP
       port: 80
