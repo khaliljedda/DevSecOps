@@ -5,7 +5,7 @@ metadata:
   labels:
     app: empapp-back
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: empapp-back
@@ -21,26 +21,24 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: DB_HOST
+        - name: SPRING_DATASOURCE_URL
           valueFrom:
             configMapKeyRef:
               name: mysql-configmap
               key: database_url
-        - name: DB_DATABASE
-          valueFrom: 
-            configMapKeyRef:
-              name: mysql-configmap
-              key: database_name
-        - name: DB_USERNAME
+        - name: SPRING_DATASOURCE_USERNAME
           valueFrom: 
             secretKeyRef:
               name: mysql-secret
               key: mysql-root-username
-        - name: DB_PASSWORD
+        - name: SPRING_DATASOURCE_PASSWORD
           valueFrom: 
             secretKeyRef:
               name: mysql-secret
               key: mysql-root-password  
+        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+          value: update
+
                  
 ---
 apiVersion: v1
