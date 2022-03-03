@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: mysql-configmap
 data:
-  database_url: mysql-service
-  database_name: blog
+  database_url: jdbc:mysql://mysql-service:3306/employeemanager
+  database_name: employeemanager
