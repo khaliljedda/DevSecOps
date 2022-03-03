@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: empapp-front
-        image: khalil4/blogfront:V1
+        image: khalil4/employee-app-back
         ports:
         - containerPort: 80
         env:
