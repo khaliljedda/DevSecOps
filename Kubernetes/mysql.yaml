@@ -22,11 +22,11 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: password
           ports:
-           - name: MYSQL_DATABASE  
-            valueFrom: 
-              configMapKeyRef:
-                name: mysql-configmap
-                key: database_name
+            - name: MYSQL_DATABASE  
+              valueFrom: 
+                configMapKeyRef:
+                  name: mysql-configmap
+                  key: database_name
             - name: MYSQL_ALLOW_EMPTY_PASSWORD
               value: 1
           volumeMounts:
