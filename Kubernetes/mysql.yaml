@@ -1,44 +1,51 @@
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
-  labels:
-    app: mysql
+  name: mysql
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: mysql
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: mysql
     spec:
       containers:
-      - name: mysql
-        image: mysql:5.7
-        ports:
-        - containerPort: 3306
-        env:
-         - name: MYSQL_DATABASE
-           valueFrom: 
+        - image: mysql:5.7
+          name: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+          ports:
+           - name: MYSQL_DATABASE  
+            valueFrom: 
               configMapKeyRef:
                 name: mysql-configmap
                 key: database_name
-         - name: MYSQL_ROOT_PASSWORD
-           valueFrom: 
-              secretKeyRef:
-                name: mysql-secret
-                key: mysql-root-password
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: 1
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mysql-service
 spec:
+  ports:
+    - port: 3306
   selector:
     app: mysql
-  ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306
+  clusterIP: None
+
