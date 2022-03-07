@@ -32,7 +32,7 @@ spec:
               name: mysql-secret
               key: mysql-root-username
         - name: SPRING_DATASOURCE_PASSWORD
-          value: "password"
+          value: "root"
         - name: SPRING_JPA_HIBERNATE_DDL_AUTO
           value: update
 
