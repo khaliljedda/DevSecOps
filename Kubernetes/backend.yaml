@@ -17,7 +17,7 @@ spec:
       containers:
       - name: empapp-back
         image: khalil4/employee-app-back
-      
+  
         ports:
         - containerPort: 80
         env:
@@ -32,7 +32,7 @@ spec:
               name: mysql-secret
               key: mysql-root-username
         - name: SPRING_DATASOURCE_PASSWORD
-          value:   
+          value: "password"
         - name: SPRING_JPA_HIBERNATE_DDL_AUTO
           value: update
 
@@ -50,3 +50,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+
+   
