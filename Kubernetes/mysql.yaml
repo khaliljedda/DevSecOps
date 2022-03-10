@@ -14,13 +14,19 @@ spec:
         app: mysql
     spec:
       containers:
-        - image: mysql:8.0
+        - image: mysql:5.7
           name: mysql
           env:
            - name: MYSQL_DATABASE
-             value: "employeemanager"
+             valueFrom: 
+               configMapKeyRef:
+                 name: mysql-configmap
+                 key: database_name
            - name: MYSQL_ROOT_PASSWORD
-             value: "root"
+             valueFrom: 
+               secretKeyRef:
+                 name: mysql-secret
+                 key: mysql-root-password
           ports:
             - containerPort: 3306
               name: mysql
@@ -40,5 +46,6 @@ metadata:
 spec:
   ports:
     - port: 3306
+      targetPort: 3306
   selector:
     app: mysql
