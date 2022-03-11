@@ -7,6 +7,6 @@ RUN npm run build --prod
 # stage 2
 FROM nginx:alpine
 COPY --from=node /app/dist/employeemanagerapp /usr/share/nginx/html
-
+CMD ["/bin/sh",  "-c",  "envsubst < /usr/share/nginx/html/assets/env.template.js > /usr/share/nginx/html/assets/env.js && exec nginx -g 'daemon off;'"]
 # Expose the port the app runs in
 EXPOSE 80

@@ -10,7 +10,7 @@ const isProduction = environment === 'prod';const targetPath = isProduction
 const environmentFileContent = `
 export const environment = {
    production: ${isProduction},
-   apiBaseUrl: "${process.env.API_URL}",
+   apiUrl: "${process.env.API_URL}",
   
 };
 `;// write the content to the respective file

@@ -1,2 +1,2 @@
-kubectl apply  error : Found character that cannot start any token
+1. kubectl apply  error : Found character that cannot start any token
     solution : convert tabs to space    cat -T yourfile.yaml | grep "^^I"

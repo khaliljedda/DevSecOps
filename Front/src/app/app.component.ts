@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   constructor(private employeeService: EmployeeService){}
 
   ngOnInit() {
-    console.log(environment.apiBaseUrl);
+    console.log(environment.apiUrl);
     this.getEmployees();
   }
 

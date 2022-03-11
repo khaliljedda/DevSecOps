@@ -5,7 +5,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: "10.109.162.170"
+  apiUrl: window["env"]["apiUrl"] || "default",
+  debug: window["env"]["debug"] || false
 };
 
 
