@@ -15,7 +15,10 @@
    so you should delete this directory 
    in my case "sudo rm -r /mnt/data"
 
-3) i can't connect to the backend-service
-   the problem is the targetPort it not the same widh my container port
-
-   solution: I change it
+3) i can't connect to the backend-service:
+   problem: because i use the backend service name in my scrip code in the frontend,
+            so the the service name will be called from the browser.
+            or it this service is not accessible from the outside the cluster.
+   
+   sollution: create a reverse proxy with nginx 
+  

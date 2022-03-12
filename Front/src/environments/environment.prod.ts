@@ -1,6 +1,8 @@
 ﻿
 export const environment = {
   production: true,
-  apiUrl: "empapp-back-service"
+  apiUrl: 'API'
+    /* apiUrl: window["env"]["apiUrl"] || "default",
+  debug: window["env"]["debug"] || false */
   
 };
