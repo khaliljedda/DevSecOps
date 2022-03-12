@@ -1,2 +1,21 @@
-1. kubectl apply  error : Found character that cannot start any token
+1) kubectl apply  error : Found character that cannot start any token
     solution : convert tabs to space    cat -T yourfile.yaml | grep "^^I"
+
+
+2) when I change the version of the mysql Deployment i had the error: 
+        RunContainerError, CrashLoopBackOff ou Error
+  and if i show the mysql pod logs i get:
+       [ERROR] [FATAL] InnoDB: Table flags are 0 in the data dictionary but the flags in file ./ibdata1 are 0x4000!
+       [ERROR] Plugin 'InnoDB' init function returned error.
+       .
+       .
+       .
+       .
+   the problem is the configurations of the other version  are still exist in the persistance volume 
+   so you should delete this directory 
+   in my case "sudo rm -r /mnt/data"
+
+3) i can't connect to the backend-service
+   the problem is the targetPort it not the same widh my container port
+
+   solution: I change it
