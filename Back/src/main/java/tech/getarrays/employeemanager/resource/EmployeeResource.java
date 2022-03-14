@@ -10,7 +10,7 @@ import tech.getarrays.employeemanager.service.EmployeeService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/API/employee")
 public class EmployeeResource {
 
     @Autowired
