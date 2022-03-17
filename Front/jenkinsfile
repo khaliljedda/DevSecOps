@@ -5,16 +5,23 @@ pipeline {
             steps {
                 git([url: 'https://github.com/khaliljedda/DevSecOps.git', branch: 'frontend'])
     }}
-        stage('Docker Build and Tag') {
+         stage(' test ') {
             steps {
-                sh 'cd Front'
+                
+                echo 'testing the application ....'
+               
+            }
+        }
+        stage(' Build ') {
+            steps {
+                
                 sh 'npm install'
                 sh 'npm run build'
                 sh 'docker build -t khalil4/employee-app-back .'
                
             }
         }
-
+ 
         stage('Publish image to Docker Hub') {
             steps {
                 withDockerRegistry([ credentialsId: 'dockerhub_id', url: '' ]) {
