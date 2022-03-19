@@ -1,25 +1,30 @@
 pipeline {
     agent any
       tools {nodejs "Node"}
-    stages {
-        stage('Cloning Git') {
-            steps {
-                git([url: 'https://github.com/khaliljedda/DevSecOps.git', branch: 'frontend'])
-    }}
-         stage(' test ') {
-            steps {
-                
-                echo 'testing the application ....'
-               
+      
+        stages {
+            stage('Cloning Git') {
+                steps {
+                    git([url: 'https://github.com/khaliljedda/DevSecOps.git', branch: 'frontend'])
+        }}
+
+        stage(' test ') {
+            steps {    
+                echo 'testing the application ....'   
             }
         }
+
         stage(' Build ') {
-            steps {              
+            steps {   
+                 dir(path: 'Front/') {
+           
                 sh 'npm install'
                 sh 'npm run build'
+       
+              
                 sh 'docker build -t khalil4/employee-app-back .'               
             }
-        }
+        } }
  
         stage('Publish image to Docker Hub') {
             steps {
