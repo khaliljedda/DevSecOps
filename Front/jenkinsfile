@@ -1,5 +1,6 @@
 pipeline {
     agent any
+      tools {nodejs "Node"}
     stages {
         stage('Cloning Git') {
             steps {
@@ -13,12 +14,10 @@ pipeline {
             }
         }
         stage(' Build ') {
-            steps {
-                
+            steps {              
                 sh 'npm install'
                 sh 'npm run build'
-                sh 'docker build -t khalil4/employee-app-back .'
-               
+                sh 'docker build -t khalil4/employee-app-back .'               
             }
         }
  
