@@ -1,8 +1,8 @@
 pipeline {
     agent any
       tools {nodejs "Node",
-            docker,"docker"}
-      
+           }
+      options { checkoutToSubdirectory('Front/') }
         stages {
             stage('Cloning Git') {
                 steps {
@@ -17,14 +17,14 @@ pipeline {
 
         stage(' Build ') {
             steps {   
-                 dir(path: 'Front/') {
+                
            
                 sh 'npm install'
                 sh 'npm run build'
        
               
                 sh 'docker build -t khalil4/employee-app-back .'               
-            }
+           
         } }
  
         stage('Publish image to Docker Hub') {
