@@ -33,13 +33,13 @@ pipeline {
          
         } }
  
-        stage('Publish image to Docker Hub') {
+      /*   stage('Publish image to Docker Hub') {
             steps {
                 withDockerRegistry([ credentialsId: 'dockerhub_id', url: '' ]) {
                   dockerImage.push("latest")
                 }
             }
-        }
+        } */
        /*  stage('Deploying App to Kubernetes') {
             steps {
                 script {
