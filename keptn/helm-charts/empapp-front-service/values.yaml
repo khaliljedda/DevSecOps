@@ -1,0 +1,2 @@
+image: khalil4/employee-app-front:latest
+replicaCount: 1

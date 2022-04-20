@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empapp-front
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: empapp-front
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: empapp-front
+  template:
+    metadata:
+      labels:
+        app: empapp-front
+    spec:
+      containers:
+      - name: empapp-front
+        image: {{ .Values.image}}
+        ports:
+        - containerPort: 80
+        env:
+        - name: API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-configmap
+              key: api_url
+        
+         

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empapp-back
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: empapp-back
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: empapp-back
+  template:
+    metadata:
+      labels:
+        app: empapp-back
+    spec:
+      containers:
+      - name: empapp-back
+        image: {{ .Values.image}}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: database_url
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom: 
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: mysql-secret
+              key: mysql-root-password
+        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+          value: "update"
