@@ -1,5 +1,5 @@
 
-###Implemented approch
+### Implemented approch
 The main goal of this project is to define the best practices across different technologies for including performance and security engineering in the DevOps pipeline.
 
 ![image](https://user-images.githubusercontent.com/46020280/201217831-0c9370f0-c30b-4b96-8cf9-70202a5fe318.png)
@@ -10,7 +10,7 @@ The main goal of this project is to define the best practices across different t
 
 * Monitoring system to check the reliability of the application
 
-###Architecture
+### Architecture
 In section, we will give an overview of the implemented solution for the CI/CD stream. The flow can be explained through the following steps:
 
 ![image](https://user-images.githubusercontent.com/46020280/201218153-68206dde-b891-40ab-969b-a97564b55fe7.png)
